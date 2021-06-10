@@ -13,7 +13,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   resolve: {
     extensions : ['.js', '.vue'],
-    // 경로 별칭, 해당하는 경로 위치로 보내기 위하여 미리 설정
+    // 경로 별칭, 해당하는 경로 위치로 보내기 위하여 설정
     alias: {
       '~': path.resolve(__dirname, 'src'),
       'assets': path.resolve(__dirname, 'src/assets')
@@ -53,6 +53,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude: /node_modules/, // 제외할 경로
         use: [
           'babel-loader'
         ]
@@ -79,7 +80,10 @@ module.exports = {
     new VueLoaderPlugin()
   ],
 
+  // 개발 서버 옵션
   devServer: {
-    host: 'localhost'
+    host: 'localhost',
+    port: 8080,
+    hot: true
   }
 }
